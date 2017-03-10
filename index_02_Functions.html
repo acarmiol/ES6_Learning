@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Function Improvements</title>
+</head>
+<body>
+<h3>Arrow Functions</h3>
+<ol>
+	<li>Much more concise</li>
+	<li>Implicit returns</li>
+	<li>It doesn't rebind the value of <b>this</b></li>
+</ol>
+<h2>When not to use => Arrow Functions</h2>
+<ol>
+	<li>When you really need this. With arrow functions this could be the window object <button id="pushy" style="font-size:15px" class="on">Try me</button></li>
+
+	<li>When you need a method to bind to the object</li>
+	<li>When adding a prototype in a constructor</li>
+	<li>We you have to access the arguments in arrow functions</li>
+</ol>
+
+
+  <style>
+  	.on{
+  		background: lightblue;
+  		color:white;
+  	}
+    .wrap {
+      min-height: 100vh;
+      display:flex;
+      justify-content: center;
+      align-items: center;
+      font-family: sans-serif;
+      font-weight: 100;
+      color:white;
+    }
+
+    .box {
+      background:black url(https://unsplash.it/1500/1500?image=560&blur=0.5) center fixed no-repeat;
+      width:50px;
+      height:50px;
+      padding:50px;
+      transition: width 0.2s, height 0.6s;
+      position: relative;
+    }
+
+    .box.opening {
+      width:500px;
+      height:500px;
+    }
+
+    .box h2 {
+      position: absolute;
+      width:100%;
+      font-size: 100px;
+      transform:translateX(-200%);
+      transition: all 0.5s;
+      top:0;
+    }
+
+    .box p {
+      position: absolute;
+      width:100%;
+      transform:translateX(200%);
+      transition: all 0.5s;
+      bottom:0;
+    }
+
+    .box.open > * {
+      transform:translateX(0%);
+    }
+  </style>
+
+  <div class="wrap">
+    <div class="box">
+      <h2>Wes Bos</h2>
+      <p class="social">@wesbos</p>
+    </div>
+  </div>
+
+
+
+<p>Please see console for code practice 👇⤵🔻</p>
+
+
+<script>
+	//This is an array...
+	const names = ['camila','rex','boris'];
+	//want to add another word to each 
+
+/*	const fullNames = names.map(function(name) {
+		return `${name} bos`; 	});
+*/
+	//my first function with arrow
+	//with only one parameter(name in this case you dont need paranthesis)
+	const fullNames2 = names.map(name=>{
+		return `${name} bos`;
+		
+	})
+
+	console.log(fullNames2)
+
+	//IMPLICIT RETURN, it is when you type return.  You dont need for this type of function
+	const fullNames3 = names.map(name=>
+		`${name} bos`);
+
+	console.log(fullNames3);
+
+	//ES6 example of function literal
+
+	const sayMyFunction = (name) =>{console.log(`Hello ${name}`)};
+	sayMyFunction('Adrian')
+
+	//More practice with map()
+
+	const race = '10K El Team';
+	const winners = ['Adrian','Roberto', 'Arturo'];
+	const fullFamily = winners.map(winner=>`${winner} Carmiol`);
+	const listofWinners = winners.map((winner,i)=>({
+		name:winner,
+		race,
+		ranking:i+1
+	}))
+	console.log(fullFamily);
+	console.table(listofWinners)
+
+	//USE OF FILTER WITH ARRAYS
+
+	const seniorCitezens = [55,65,67,69,79,43];
+
+	const listSC = seniorCitezens.filter(seniorCitezen => seniorCitezen>=65);
+
+	console.log(listSC);
+ 
+
+  	//Box Code
+
+  	const box = document.querySelector('.box');
+  	box.addEventListener('click',function(){
+  		this.classList.toggle('opening');
+  		setTimeout(()=>{this.classList.toggle('open')
+  	},500)
+  	})
+
+  	//function to calcuale amount of dinner: meal + impuestos +propina
+
+  	function totalMeal(meal, tax=0.13, tip=0.20){
+  		return meal + (meal*tax) + (meal*tip)
+  	}
+
+  	console.log("El costo total de su cena es: $" +totalMeal(100,0.15,0.20));
+
+  	const button = document.querySelector('#pushy');
+  	button.addEventListener('click',function(){
+  		this.classList.toggle('on');
+  	});
+
+  	//do not use arrow functions when you add to an object
+
+  	const person = {
+  		points : 3,
+  		score(){
+  			console.log(this)
+  			this.points++;
+  		}
+  	}
+  	;
+  	//For constructors always use regular functions
+  	class Car {
+  	  constructor(make, colour) {
+  	    this.make = make;
+  	    this.colour = colour;
+  	  }
+  	}
+
+  	const beemer = new Car('bmw', 'blue');
+  	const subie = new Car('Subaru', 'white');
+
+  	Car.prototype.summarize = function() {
+  	   return `This car is a ${this.make} in the colour ${this.colour}`;
+  	};
+  	
+
+
+
+	
+
+</script>	
+</body>
+</html>

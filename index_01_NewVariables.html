@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>New Variables</title>
+</head>
+<body>
+
+
+<script>
+	var width = 50; // you can reassign them & update them 
+
+	var age = 14;
+	if (age>12){
+		var dogYears = age * 7;
+		console.log(`You are ${dogYears} dog years old`)
+	}
+
+
+	//The following are scope to the block {}, in the above case var dogYears is global
+	//The are declare only once
+	//they are scope different global or local
+	let height = 200;
+	const key = 'abc123';
+
+	// Where are they scope:var are function scope, available only inside the function (local) or the window/global
+
+	//REPLACING THE IIFE:
+		//ejemplos regular:
+	(function(){
+		var myText = "hello stupid world 🌎";
+		console.log(myText)
+	})();
+
+	//ejemplo es6:
+	{
+		const myTeacher = "Wes Bos 💛"
+		console.log(myTeacher)
+	}
+
+	//FOR LOOP
+	//regular problem in the below case is that the iteration has already run and i is get after the loop has finished
+
+	/*for(var i = 0;i<=10;i++){
+		console.log(i)
+		setTimeout(function(){
+			console.log("the number is:" + i)
+		},1000)
+	}*/
+	for(let i = 0;i<=10;i++){
+			console.log(i)
+			setTimeout(function(){
+				console.log("the number is:" + i)
+			},1000)
+		};
+
+	//the temp dead zone
+	console.log("follow Mathias Bynens.  This dude knows his shit..I mean JS 🐮")
+
+
+
+</script>
+	
+</body>
+</html>
